@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,  } from '@angular/core';
 import { AppareilService } from './services/appareil.service';
 
 
@@ -7,28 +7,11 @@ import { AppareilService } from './services/appareil.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  isAuth = false;
-  lastUpdate = new Date();
-
-  appareils:any[];
-  constructor(private appareilService: AppareilService){
-
-  }
-  
-    
-  ngOnInit(){
-    this.appareils = this.appareilService.appareils;
+export class AppComponent {
+  constructor(){}
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
   }
 
- 
-  title: any;
-  onAllumer(){
-    this.appareilService.SwitchOnAll();
-  }
-
-  onEteindre(){
-    this.appareilService.SwitchOffAll();
-  }
 }
 
