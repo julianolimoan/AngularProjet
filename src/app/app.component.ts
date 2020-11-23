@@ -1,5 +1,8 @@
-import { Component,  } from '@angular/core';
+import { Component, OnDestroy, OnInit,  } from '@angular/core';
 import { AppareilService } from './services/appareil.service';
+import { Observable, interval, Subscription } from 'rxjs';
+
+
 
 
 @Component({
@@ -7,10 +10,26 @@ import { AppareilService } from './services/appareil.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
+  secondes: number;
+  counterSubscription: Subscription;
   constructor(){}
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    const counter = interval(1000);
+    counter.subscribe(
+      (value:number)=>{
+        this.secondes = value;
+      },
+        (error: any) => {
+        console.log('Une erreur');
+      },
+      () => {
+        console.log('Observable complétée !' );
+      }
+      );    
+  }
+  ngOnDestroy(){
+    this.counterSubscription.unsubscribe();
   }
 
 }

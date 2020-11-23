@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AppareilService } from '../services/appareil.service';
 
 @Component({
@@ -10,6 +11,11 @@ export class AppareilViewComponent implements OnInit {
   isAuth = false;
   lastUpdate = new Date();
 
+
+
+
+  appareilSubscription: Subscription
+
   appareils:any[];
   constructor(private appareilService: AppareilService){
 
@@ -17,7 +23,13 @@ export class AppareilViewComponent implements OnInit {
   
     
   ngOnInit(){
-    this.appareils = this.appareilService.appareils;
+    this.appareilSubscription = this.appareilService.appareilSubject.subscribe(
+      (appareils:any[]) => {
+        this.appareils = appareils;
+      }
+    );
+    this.appareilService.onitAppareilSubject(); 
+
   }
 
  

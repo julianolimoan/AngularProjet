@@ -8,13 +8,23 @@ import {AppareilService} from './services/appareil.service';
 import { AuthComponent } from './auth/auth.component';
 import { AppareilViewComponent } from './appareil-view/appareil-view.component';
 import  {RouterModule, Routes} from"@angular/router";
+import {AuthService} from"./services/auth.service";
+import { SingleAppareilComponent } from './single-appareil/single-appareil.component';
+import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
+import { EditAppareilComponent } from './edit-appareil/edit-appareil.component';
 
 
 const appRoutes: Routes = [
   { path: 'appareils', component: AppareilViewComponent },
+  {path: 'edit', component: EditAppareilComponent},
   {path: 'auth', component: AuthComponent },
-  {path: '', component: AppareilViewComponent }
+  {path: '', component: AppareilViewComponent },
+  {path: 'appareils/:id', component: SingleAppareilComponent},
+  {path: 'not-found', component:FourOhFourComponent},
+  {path: '**', redirectTo: '/not-found'},
+  
 ];
+
 
 
 
@@ -23,7 +33,10 @@ const appRoutes: Routes = [
     AppComponent,
     AppareilComponent,
     AuthComponent,
-    AppareilViewComponent
+    AppareilViewComponent,
+    SingleAppareilComponent,
+    FourOhFourComponent,
+    EditAppareilComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +45,8 @@ const appRoutes: Routes = [
     
   ],
   providers: [
-    AppareilService
+    AppareilService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
